@@ -1,4 +1,4 @@
-#Qlik Enterprise Architecture team Power Tools
+#Enterprise Architecture team Power Tools
 ##Custom Property Bulk Loader
 
 ###Introduction
@@ -35,6 +35,6 @@ The custom property bulk loader is intended to work through the Qlik Sense servi
 
 ---
 ### Support
-<h5 style="color:red;">Qlik Enterprise Architecture team Power Tools are not officially supported by Qlik.  Please do not contact Qlik support for help or support on this solution.</h5>
+<h5 style="color:red;">Enterprise Architecture team Power Tools are not officially supported by Qlik.  Please do not contact Qlik support for help or support on this solution.</h5>
 <h5 style="color:green;">The Enterprise Architecture team does provide limited support for the Power Tools deployed publicly.</h5>
 <h5 style="color:#4183c4">Please use the issues list to provide feedback and identify bugs we can squash.</h5>
