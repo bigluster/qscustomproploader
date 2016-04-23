@@ -77,3 +77,12 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#ignore uploaded files
+uploads/*
+
+#certfiles
+*.pem
+
+#VSCode Configuration
+.vscode

@@ -1,0 +1,62 @@
+<div class="form-inline">
+    <div class="row">
+        <div class="col-md-2">
+            <label for="uploadButton">Select file to upload:</label>
+        </div>
+        <div class="col-md-3">
+            <input class="form-control-file" id="uploadButton" type="file" (change)="fileChangeEvent($event)" name="fileRequested">
+        </div>
+        <div class="col-md-2">
+            <button type="button" (click)="upload()" class="btn btn-primary btn-block" style="padding-top:5px">Upload</button>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <div class="table-responsive">
+                <table class="table scroll" *ngIf="propValues && propValues.length">
+                    <thead>
+                        <tr>
+                            <th>Custom Property Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="#propValue of propValues">
+                            <td>{{propValue}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!filesToUpload.length && !propValues.length">
+        <p class="alert alert-danger">Please upload a file.</p>
+    </div>
+</div>
+
+    
+<!--
+    
+    <label for="uploadButton" style="inline-block;">Select file...</label>
+            <input class="form-control-file" id="uploadButton" type="file" 
+                (change)="fileChangeEvent($event)" 
+                name="fileRequested" >
+    <button type="submit" (click)="upload()" class="btn btn-default">Upload</button>
+    
+<div class="table-responsive" style="overflow:auto">
+    <table class="table" *ngIf="propValues && propValues.length">
+        <thead>
+            <tr>
+                <th>Custom Property Values</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="#propValue of propValues">
+                <td>{{propValue}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>    
+    
+</div>
+
+-->
