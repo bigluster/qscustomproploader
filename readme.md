@@ -35,9 +35,12 @@ The custom property bulk loader is intended to work through the Qlik Sense servi
 * Add values to existing custom properties
 * Inline editing of uploaded property values
 
-
 ---
 ### Support
 <h5 style="color:red;">Enterprise Architecture team Power Tools are not officially supported by Qlik.  Please do not contact Qlik support for help or support on this solution.</h5>
 <h5 style="color:green;">The Enterprise Architecture team does provide limited support for the Power Tools deployed publicly.</h5>
 <h5 style="color:#4183c4">Please use the issues list to provide feedback and identify bugs we can squash.</h5>
+
+---
+### Power Tool Code Details
+The custom property bulk loader is an Angular2 app running with nodejs on the back end for routing file upload and submission capabilities.  The source code is available on this repository, but is not necessary to run the application.  Please download the __[installer](https://github.com/eapowertools/qscustomproploader/blob/master/Install/setup.exe)__ to use the application.
