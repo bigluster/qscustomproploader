@@ -1,7 +1,7 @@
+#[Download Install](https://github.com/eapowertools/qscustomproploader/blob/master/Install/setup.exe)
+
 #Enterprise Architecture team Power Tools
 ##Custom Property Bulk Loader
-
-#[Download Install](https://github.com/eapowertools/qscustomproploader/blob/master/Install/setup.exe)
 
 ###Introduction
 The custom property bulk loader enables you to create custom properties and import custom property values from a comma separated value (csv) file.  The goal is to eliminate manual entry of custom property values and enable greater use of custom properties on Qlik Sense resources.  The outcome is fewer security rules required to drive governance and authorization of Qlik Sense resources preventing rule creep and a proliferation of rules in a Qlik Sense deployment.
