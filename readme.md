@@ -32,6 +32,7 @@ The custom property bulk loader is intended to work through the Qlik Sense servi
 ---
 ### Planned Enhancements
 * Existing property name detection
+* Add values to existing custom properties
 * Inline editing of uploaded property values
 
 
