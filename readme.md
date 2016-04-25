@@ -8,7 +8,7 @@ The custom property bulk loader enables you to create custom properties and impo
 
 To learn more about Qlik Sense security rules, __[check out this video introducing Qlik Sense security rules.](https://drive.google.com/open?id=0BxBEVQthCb29ZjVXVEZpQUtOZk0)__
 
-To learn more about building flexible security rules in Qlik Sense __[check out this excellent video by  @Marcus Spitzmiller.](https://community.qlik.com/videos/3762)__
+To learn more about building flexible security rules in Qlik Sense __[check out this excellent video by  @marcusspitzmiller.](https://community.qlik.com/videos/3762)__
 
 ---
 ###Usage
