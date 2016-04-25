@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../app.config'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, http_2, Observable_1;
+    var core_1, http_1, http_2, Observable_1, app_config_1;
     var QRSService;
     return {
         setters:[
@@ -23,12 +23,18 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             },
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
+            },
+            function (app_config_1_1) {
+                app_config_1 = app_config_1_1;
             }],
         execute: function() {
             QRSService = (function () {
-                function QRSService(_http) {
+                function QRSService(appConfig, _http) {
+                    this.appConfig = appConfig;
                     this._http = _http;
-                    this._QRSUrl = 'http://localhost:8432/create';
+                    this.serverUrl = appConfig.hostname;
+                    this.serverPort = appConfig.port;
+                    this._QRSUrl = 'http://' + this.serverUrl + ':' + this.serverPort + '/create';
                 }
                 QRSService.prototype.sendQRSRequest = function (propName, selectedResources, propValues) {
                     var body = JSON.stringify(this.buildPayload(propName, selectedResources, propValues));
@@ -67,7 +73,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 };
                 QRSService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Http])
+                    __metadata('design:paramtypes', [app_config_1.AppConfig, http_1.Http])
                 ], QRSService);
                 return QRSService;
             }());

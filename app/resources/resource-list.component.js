@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/router', './resource.service', '../qrs/qrs.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', './resource.service', '../qrs/qrs.service', '../app.config'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './resou
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, router_1, resource_service_1, qrs_service_1;
+    var core_1, common_1, router_1, resource_service_1, qrs_service_1, app_config_1;
     var ResourceListComponent;
     return {
         setters:[
@@ -28,10 +28,14 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './resou
             },
             function (qrs_service_1_1) {
                 qrs_service_1 = qrs_service_1_1;
+            },
+            function (app_config_1_1) {
+                app_config_1 = app_config_1_1;
             }],
         execute: function() {
             ResourceListComponent = (function () {
-                function ResourceListComponent(_resourceService, _QRSService, fb) {
+                function ResourceListComponent(appConfig, _resourceService, _QRSService, fb) {
+                    this.appConfig = appConfig;
                     this._resourceService = _resourceService;
                     this._QRSService = _QRSService;
                     this.pageTitle = 'Qlik Sense Resources';
@@ -49,6 +53,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './resou
                     this.customPropResources = this.myForm.controls['customPropResources'];
                     this.filesToUpload = [];
                     this.propValues = [];
+                    this.serverUrl = appConfig.hostname;
+                    this.serverPort = appConfig.port;
                 }
                 ResourceListComponent.prototype.propNameValidator = function (control) {
                     if (!control.value.match(/^\w*$/)) {
@@ -110,7 +116,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './resou
                 ResourceListComponent.prototype.upload = function () {
                     var _this = this;
                     this.propValues = [];
-                    this.makeFileRequest("http://localhost:8432/upload", [], this.filesToUpload)
+                    this.makeFileRequest("http://" + this.serverUrl + ":" + this.serverPort + "/upload", [], this.filesToUpload)
                         .then(function (result) {
                         for (var k in result) {
                             _this.propValues.push(result[k]);
@@ -152,9 +158,9 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', './resou
                         templateUrl: 'app/resources/resource-list.component.html',
                         styleUrls: ['app/resources/resource-list.component.css'],
                         directives: [router_1.ROUTER_DIRECTIVES, common_1.FORM_DIRECTIVES],
-                        providers: [qrs_service_1.QRSService]
+                        providers: [qrs_service_1.QRSService, app_config_1.AppConfig]
                     }), 
-                    __metadata('design:paramtypes', [resource_service_1.ResourceService, qrs_service_1.QRSService, common_1.FormBuilder])
+                    __metadata('design:paramtypes', [app_config_1.AppConfig, resource_service_1.ResourceService, qrs_service_1.QRSService, common_1.FormBuilder])
                 ], ResourceListComponent);
                 return ResourceListComponent;
             }());

@@ -3,15 +3,22 @@ import {Http, Response} from 'angular2/http';
 import {Headers, RequestOptions} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import {IQRSMessage} from './qrs.message';
+import {AppConfig} from '../app.config';
 
 @Injectable()
 export class QRSService {
-        private _QRSUrl = 'http://localhost:8432/create';
+        private serverUrl: string;
+        private serverPort: number;
+        private _QRSUrl: string;
         
-        
-        constructor(private _http: Http){
-            
+        constructor(private appConfig: AppConfig, private _http: Http){
+            this.serverUrl = appConfig.hostname;
+            this.serverPort = appConfig.port;
+            this._QRSUrl = 'http://' + this.serverUrl + ':' + this.serverPort + '/create';
         }
+        
+
+        
         sendQRSRequest(propName: string,
             selectedResources:string[],
             propValues:string[]): Observable<any> {

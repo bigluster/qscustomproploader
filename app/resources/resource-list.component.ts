@@ -1,4 +1,4 @@
-import {Component,OnInit} from 'angular2/core';
+import {Component,OnInit, } from 'angular2/core';
 import {FORM_DIRECTIVES,FormBuilder,
     ControlGroup,Validators,AbstractControl,Control}    from 'angular2/common';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
@@ -6,14 +6,14 @@ import {IResource} from './resource';
 import {ResourceService} from './resource.service';
 import {QRSService} from '../qrs/qrs.service';
 import {IQRSMessage} from '../qrs/qrs.message';
-
+import {AppConfig}    from '../app.config';
 
 @Component({
     selector: 'testform',
     templateUrl: 'app/resources/resource-list.component.html',
     styleUrls: ['app/resources/resource-list.component.css'],
     directives: [ROUTER_DIRECTIVES,FORM_DIRECTIVES],
-    providers: [QRSService]
+    providers: [QRSService, AppConfig]
     
 })
 export class ResourceListComponent implements OnInit{
@@ -30,9 +30,14 @@ export class ResourceListComponent implements OnInit{
     propValues: string[];
     filesToUpload: Array<File>;
     QRSMessage: IQRSMessage;
+    serverUrl: string;
+    serverPort: number;
     
     
-    constructor(private _resourceService: ResourceService, 
+    
+    
+    constructor(private appConfig:AppConfig,
+        private _resourceService: ResourceService, 
         private _QRSService: QRSService, 
         fb: FormBuilder){
         this.myForm = fb.group({
@@ -48,6 +53,8 @@ export class ResourceListComponent implements OnInit{
         this.customPropResources = this.myForm.controls['customPropResources'];        
         this.filesToUpload =[];
         this.propValues= [];
+        this.serverUrl = appConfig.hostname;
+        this.serverPort = appConfig.port;
     }
     
     propNameValidator(control: Control): {[s: string]: boolean} {
@@ -130,7 +137,7 @@ export class ResourceListComponent implements OnInit{
     
     upload(): any {
         this.propValues= [];
-        this.makeFileRequest("http://localhost:8432/upload", [], this.filesToUpload)
+        this.makeFileRequest("http://" + this.serverUrl + ":" + this.serverPort + "/upload", [], this.filesToUpload)
         .then((result) => {
             for(var k in result)
             {

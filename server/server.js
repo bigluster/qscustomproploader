@@ -1,4 +1,5 @@
 
+process.env.NODE_PATH = __dirname;
 //simple web page using express
 var express = require('express');
 var multer = require('multer');
@@ -63,46 +64,51 @@ app.post("/create", function(req,res)
 	});
 });
 
-app.post("/upload", multer({dest: "../uploads/"}).array("uploads[]", 1), function(req, res)
+var destDir = path.join(__dirname, "/uploads/");
+
+var upload = multer({dest: destDir}).array("uploads[]", 1);
+app.post("/upload", function(req, res)
 {
-	//console.log(req);
-	//console.log(req.body);
-	console.log('uploading');
-	console.log('length: ' + req.files.length);
-    console.log('path: ' + req.files[0].path);
-	var filepath = path.join(__dirname, req.files[0].path);
-    //console.log(filepath);
-    //res.status(200).json(filepath);
-
-	var fileStream = fs.createReadStream(filepath);
-	var rl = readLine.createInterface({
-		input: fs.createReadStream(filepath)
-	});
-
-	var propArray =[];
-	rl.on('line', function(line){
-		//console.log(line);
-		propArray.push(line);
-	});
-
-	rl.on('close', function(){
-		
-		res.on('autoreap', function(reapedFile)
+	upload(req, res, function(err)
+	{
+		if(err)
 		{
-			console.log('reap file: ' + reapedFile);
-		});
+			res.json(err);
+		}
+		console.log('uploading');
+		console.log('length: ' + req.files.length);
+		console.log('path: ' + req.files[0].path);
+
+		var obj = {};
+
+		obj.length = req.files.length;
+		obj.path = req.files[0].path;
+		obj.fieldName = req.files[0].fieldname;
+		obj.originalName = req.files[0].originalname;
+
 		
-		//console.log(propArray);
-		res.status(200).json(propArray);
+		var fileStream = fs.createReadStream(req.files[0].path);
+		var rl = readLine.createInterface({
+			input: fileStream,
+			terminal:false
+		});
+
+		var propArray =[];
+		rl.on('line', function(line){
+			propArray.push(line);
+		});
+
+		rl.on('close', function(){				
+			res.on('autoreap', function(reapedFile)
+			{
+				console.log('reap file: ' + reapedFile);
+			});
+			res.status(200).json(propArray);
+		});
 	});
-
-	//rl.close();
-
-	//console.log(statement);
-
 });
 
-app.listen(8432, function()
+app.listen(config.port, function()
 {
 	console.log('Running web server on port 8432');
 });
